@@ -4,13 +4,6 @@
 
 #include <QtOpenGL/QGLWidget>
 
-
-// TODO: Decide whether you want to use the SDK via native code (leave the following line) or want
-//       to use AREL (our cross-platform JavaScript bridge; code can even be exported from Metaio
-//       Creator in case you're using Creator)
-//#define METAIO_SDK_NATIVE
-
-
 #ifdef METAIO_SDK_NATIVE
 	#include "NativeScene.h"
 #else
@@ -25,9 +18,9 @@ Player::Player(QWidget *parent) :
 	ui.setupUi(this);
 
 #ifdef METAIO_SDK_NATIVE
-	m_pScene = new NativeScene(ui.graphicsView);
+	m_pScene = new NativeScene(ui.graphicsView, ui.statusBar);
 #else
-	m_pScene = new ARELScene(ui.graphicsView);
+	m_pScene = new ARELScene(ui.graphicsView, ui.statusBar);
 #endif
 
 	QGLWidget* glWidget = new QGLWidget(QGLFormat(QGL::SampleBuffers), ui.graphicsView);
@@ -36,7 +29,7 @@ Player::Player(QWidget *parent) :
 
 #ifndef METAIO_SDK_TEMPLATE_NATIVE
 	// If you want to disable the web view's context menu for an AREL scene, enable this line
-	// ui.graphicsView->setContextMenuPolicy(Qt::NoContextMenu);
+	ui.graphicsView->setContextMenuPolicy(Qt::NoContextMenu);
 #endif
 }
 
@@ -49,4 +42,9 @@ Player::~Player()
 void Player::setProjectPath(std::string path)
 {
 	m_pScene->setProjectPath(path);
+}
+
+void Player::setTestFilePath(std::string path)
+{
+	m_pScene->setTestFilePath(path);
 }

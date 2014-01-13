@@ -2,6 +2,7 @@
 #define SCENEBASE_H
 
 #include <QtGui/QGraphicsScene>
+#include <QStatusBar>
 
 #include <metaioSDK/IMetaioSDKCallback.h>
 #include <metaioSDK/IMetaioSDKWin32.h>
@@ -22,10 +23,13 @@ class SceneBase : public QGraphicsScene, public metaio::IMetaioSDKCallback
 public:
 	virtual ~SceneBase();
 	void setProjectPath(std::string path);
+	void setTestFilePath(std::string path);
 
 protected:
-	SceneBase(QObject *parent = 0);
+	SceneBase(QObject *parent = 0, QStatusBar *statusBar = 0);
 	
+	/// StatusBat showing version and mode
+	QStatusBar*					m_pStatusBar;
 
 	/// true if the scene has been initialized
 	bool						m_initialized;
@@ -38,11 +42,16 @@ protected:
 
 	/// Current viewport width
 	unsigned int				m_viewportWidth;
-	/// Current viewport height
 
+	/// Current viewport height
 	unsigned int				m_viewportHeight;
+
 	/// Path to the current projekt
 	std::string					projectPath;
+
+	/// Path to the testfile
+	std::string					testFilePath;
+
 	/// Sets up the updateintervall
 	unsigned int				fps;
 

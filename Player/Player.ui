@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>metaio SDK - Qt project template</string>
+   <string>ARdevKit - Player</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -67,7 +67,7 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="TemplateWindow.qrc"/>
+  <include location="Player.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'Player.ui'
 **
-** Created: Sun 12. Jan 11:37:32 2014
+** Created: Sun 12. Jan 18:10:17 2014
 **      by: Qt User Interface Compiler version 4.8.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -83,7 +83,7 @@ public:
 
     void retranslateUi(QMainWindow *TemplateWindowClass)
     {
-        TemplateWindowClass->setWindowTitle(QApplication::translate("TemplateWindowClass", "metaio SDK - Qt project template", 0, QApplication::UnicodeUTF8));
+        TemplateWindowClass->setWindowTitle(QApplication::translate("TemplateWindowClass", "ARdevKit - Player", 0, QApplication::UnicodeUTF8));
         actionSome_menu_item->setText(QApplication::translate("TemplateWindowClass", "Some menu item", 0, QApplication::UnicodeUTF8));
         menuSome_menu->setTitle(QApplication::translate("TemplateWindowClass", "Some menu", 0, QApplication::UnicodeUTF8));
     } // retranslateUi

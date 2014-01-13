@@ -14,7 +14,7 @@
 #include <metaioSDK/GestureHandler.h>
 
 
-SceneBase::SceneBase(QObject *parent) :
+SceneBase::SceneBase(QObject *parent, QStatusBar *statusBar) :
 	QGraphicsScene(parent),
 	m_initialized(false),
 	m_pGestureHandler(0),
@@ -22,7 +22,8 @@ SceneBase::SceneBase(QObject *parent) :
 	m_viewportWidth(0),
 	m_viewportHeight(0)
 {
-	//projectPath = "D:/Dropbox/dev/ARdevKit - Player/res";
+	m_pStatusBar = statusBar;
+	//projectPath = "D:/Dropbox/dev/ARdevKitPlayer/res";
 	fps = 30;
 }
 
@@ -47,6 +48,11 @@ void SceneBase::setProjectPath(std::string path)
 	projectPath = path;
 }
 
+void SceneBase::setTestFilePath(std::string path)
+{
+	testFilePath = path;
+}
+
 
 void SceneBase::drawBackground(QPainter* painter, const QRectF& rect)
 {
@@ -63,6 +69,8 @@ void SceneBase::drawBackground(QPainter* painter, const QRectF& rect)
 	if (!m_initialized)
 	{
 		m_pMetaioSDK = metaio::CreateMetaioSDKWin32();
+		// Update StatusBar
+		m_pStatusBar->showMessage((m_pMetaioSDK->getVersion()).c_str());
 		m_pMetaioSDK->initializeRenderer((int)viewportWidth, (int)viewportHeight, metaio::ESCREEN_ROTATION_0, metaio::ERENDER_SYSTEM_OPENGL_EXTERNAL);
 		
 		// TODO: Set your preferred camera resolution. On desktop platforms, one typically has more
@@ -71,16 +79,13 @@ void SceneBase::drawBackground(QPainter* painter, const QRectF& rect)
 		//       in widescreen capturing mode, i.e. have different calibration parameters. For best
 		//       results, use m_pMetaioSDK->setCameraParameters(...) to load your own calibration
 		//       for the camera model you're using.
-		/*
 		std::vector<metaio::Camera> cameras = m_pMetaioSDK->getCameraList();
 		if(cameras.size()>0)
 		{
 			// set the resolution to 640x480
 			cameras[0].resolution = metaio::Vector2di(640,480);
 			m_pMetaioSDK->startCamera( cameras[0] );
-		}*/
-		m_pMetaioSDK->startCamera(0);
-
+		}
 
 		// Listen to onSDKReady and other events that we may want to handle
 		m_pMetaioSDK->registerCallback(this);
@@ -88,7 +93,7 @@ void SceneBase::drawBackground(QPainter* painter, const QRectF& rect)
 		m_initialized = true;
 
 		m_pGestureHandler = new metaio::GestureHandler(m_pMetaioSDK);
-
+		
 		afterMetaioSDKInitialized();
 
 		// At this point, the SDK and its renderer is initialized. Since we registered ourself as
@@ -107,7 +112,12 @@ void SceneBase::drawBackground(QPainter* painter, const QRectF& rect)
 	glPushAttrib(GL_ENABLE_BIT);
 	glEnable(GL_MULTISAMPLE);
 	glEnable(GL_LINE_SMOOTH);
-
+	
+	if (testFilePath.length() != 0 && (m_pMetaioSDK->setImage(testFilePath)) == metaio::Vector2di(0, 0))
+	{
+		std::string msg = "loading " + testFilePath + " failed";
+		qCritical(msg.c_str());
+	}
 	performRendering();
 
 	glPopAttrib();

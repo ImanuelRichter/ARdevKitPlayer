@@ -22,7 +22,7 @@ class ARELScene : public SceneBase, public metaio::IARELInterpreterCallback
 	Q_OBJECT
 
 public:
-	ARELScene(QObject *parent = 0);
+	ARELScene(QObject *parent = 0, QStatusBar *statusBar = 0);
 	virtual ~ARELScene();
 
 protected slots:

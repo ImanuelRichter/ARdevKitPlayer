@@ -12,7 +12,7 @@ class NativeScene : public SceneBase, public metaio::IMetaioSDKCallback
 	Q_OBJECT
 
 public:
-	NativeScene(QObject *parent = 0);
+	NativeScene(QObject *parent = 0, QStatusBar *statusBar = 0);
 	virtual ~NativeScene();
 
 private:
