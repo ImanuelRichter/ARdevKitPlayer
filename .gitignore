@@ -16,3 +16,13 @@
 *.exe
 *.out
 *.app
+
+# Build results
+
+[Dd]ebug/
+[Rr]elease/
+x64/
+win32/
+build/
+[Bb]in/
+[Oo]bj/
