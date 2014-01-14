@@ -1,5 +1,6 @@
 ARdevKit_Player
 ===============
 
-The standard path for the project is set to ..\config
-If the player is started by itself it will try to load ..\..\ARdevKit\testFiles\testImage.png
+The player can be started from editor and load an image as source.
+To use a video as source still a virtual camera is needed.
+If no paths are specified the player will try to load the project from ..\src\project and use the camera as source
