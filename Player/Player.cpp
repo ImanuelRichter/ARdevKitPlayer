@@ -48,3 +48,8 @@ void Player::setTestFilePath(std::string path)
 {
 	m_pScene->setTestFilePath(path);
 }
+
+void Player::setMode(int mode)
+{
+	m_pScene->setMode(mode);
+}

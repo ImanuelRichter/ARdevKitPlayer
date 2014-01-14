@@ -23,10 +23,8 @@ SceneBase::SceneBase(QObject *parent, QStatusBar *statusBar) :
 	m_viewportHeight(0)
 {
 	m_pStatusBar = statusBar;
-	//projectPath = "D:/Dropbox/dev/ARdevKitPlayer/res";
-	fps = 30;
+	fps = 25;
 }
-
 
 SceneBase::~SceneBase()
 {
@@ -53,6 +51,11 @@ void SceneBase::setTestFilePath(std::string path)
 	testFilePath = path;
 }
 
+void SceneBase::setMode(int _mode)
+{
+	mode = _mode;
+}
+
 
 void SceneBase::drawBackground(QPainter* painter, const QRectF& rect)
 {
@@ -63,11 +66,15 @@ void SceneBase::drawBackground(QPainter* painter, const QRectF& rect)
 		return;
 	}
 
-	const unsigned int viewportWidth = (unsigned int)max(0, rect.width());
-	const unsigned int viewportHeight = (unsigned int)max(0, rect.height());
+	const unsigned int viewportWidth = (unsigned int)(0 < rect.width() ? rect.width() : 0);
+	const unsigned int viewportHeight = (unsigned int)(0 < rect.height() ? rect.height() : 0);
+
+	//const unsigned int viewportWidth = (unsigned int)max(0, rect.width());
+	//const unsigned int viewportHeight = (unsigned int)max(0, rect.height());
 
 	if (!m_initialized)
 	{
+
 		m_pMetaioSDK = metaio::CreateMetaioSDKWin32();
 		// Update StatusBar
 		m_pStatusBar->showMessage((m_pMetaioSDK->getVersion()).c_str());
@@ -113,10 +120,21 @@ void SceneBase::drawBackground(QPainter* painter, const QRectF& rect)
 	glEnable(GL_MULTISAMPLE);
 	glEnable(GL_LINE_SMOOTH);
 	
-	if (testFilePath.length() != 0 && (m_pMetaioSDK->setImage(testFilePath)) == metaio::Vector2di(0, 0))
+	// Load image or video
+	switch (mode)
 	{
-		std::string msg = "loading " + testFilePath + " failed";
-		qCritical(msg.c_str());
+		case (IMAGE):
+			if ((m_pMetaioSDK->setImage(testFilePath)) == metaio::Vector2di(0, 0))
+			{
+				std::string msg = "loading " + testFilePath + " failed";
+				qCritical(msg.c_str());
+			}
+			break;
+		case (VIDEO):
+			//TODO Implement code for using a video as source here
+			break;
+		case (CAMERA):
+			break;
 	}
 	performRendering();
 
@@ -124,7 +142,7 @@ void SceneBase::drawBackground(QPainter* painter, const QRectF& rect)
 
 	// Trigger an update at least every 20 milliseconds, change this if you need higher FPS, or no
 	// continuous rendering
-	QTimer::singleShot(20, this, SLOT(update()));
+	QTimer::singleShot(fps, this, SLOT(update()));
 
 	painter->restore();
 

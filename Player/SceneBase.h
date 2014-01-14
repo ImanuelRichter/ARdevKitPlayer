@@ -7,6 +7,9 @@
 #include <metaioSDK/IMetaioSDKCallback.h>
 #include <metaioSDK/IMetaioSDKWin32.h>
 
+#define IMAGE 0
+#define VIDEO 1
+#define CAMERA 3
 
 namespace metaio
 {
@@ -24,6 +27,7 @@ public:
 	virtual ~SceneBase();
 	void setProjectPath(std::string path);
 	void setTestFilePath(std::string path);
+	void setMode(int mode);
 
 protected:
 	SceneBase(QObject *parent = 0, QStatusBar *statusBar = 0);
@@ -52,8 +56,11 @@ protected:
 	/// Path to the testfile
 	std::string					testFilePath;
 
+	/// The current mode
+	int							mode;
+
 	/// Sets up the updateintervall
-	unsigned int				fps;
+	int						fps;
 
 	/**
 	 * Called directly after Metaio SDK was created and its renderer initialized

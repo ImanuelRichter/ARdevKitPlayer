@@ -23,6 +23,7 @@ public:
 	~Player();
 	void setProjectPath(std::string path);
 	void setTestFilePath(std::string path);
+	void setMode(int mode);
 
 private:
 	Ui::TemplateWindowClass		ui;
