@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 		i++;
 	}
 	if (projectPath == "")
-		projectPath = "..\\src\\project";
+		projectPath = "currentProject";
 	
 	std::ifstream projectPathIsValid(projectPath);
 	
@@ -62,6 +62,9 @@ int main(int argc, char *argv[])
 	Player p;
 
 	std::string msg = "ProjectPath:\n" + projectPath + "\n\n";
+	
+	// For testing/debugging
+	/*
 	QMessageBox msgBox;
 	msgBox.setMinimumWidth(500);
 	msgBox.setText("Configuration:");
@@ -86,6 +89,7 @@ int main(int argc, char *argv[])
 	msg += testFilePath + "\n";
 	msgBox.setInformativeText(msg.c_str());
 	msgBox.exec();
+	*/
 
 	p.setProjectPath(projectPath);
 	p.setMode(mode);

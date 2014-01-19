@@ -1,4 +1,4 @@
-﻿Der Buildvorgang wurde am 14.01.2014 20:47:41 gestartet.
+﻿Der Buildvorgang wurde am 19.01.2014 23:17:30 gestartet.
      1>Projekt "D:\Dropbox\dev\ARdevKitPlayer\Player\Player.vcxproj" auf Knoten "2", build Ziel(e).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(299,5): warning MSB8004: Das Output-Verzeichnis endet nicht mit einem nachstehenden Schrägstrich. Der Schrägstrich wird in dieser Buildinstanz hinzugefügt, da er für die ordnungsgemäße Auswertung des Output-Verzeichnisses erforderlich ist.
      1>InitializeBuildStatus:
@@ -33,4 +33,4 @@
 
 Das Erstellen war erfolgreich.
 
-Verstrichene Zeit 00:00:01.98
+Verstrichene Zeit 00:00:02.03
