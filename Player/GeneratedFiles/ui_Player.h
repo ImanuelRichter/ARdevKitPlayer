@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'Player.ui'
 **
-** Created: Tue 14. Jan 19:58:06 2014
+** Created: Fri 24. Jan 01:06:38 2014
 **      by: Qt User Interface Compiler version 4.8.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -42,7 +42,7 @@ public:
     {
         if (TemplateWindowClass->objectName().isEmpty())
             TemplateWindowClass->setObjectName(QString::fromUtf8("TemplateWindowClass"));
-        TemplateWindowClass->resize(950, 684);
+        TemplateWindowClass->resize(1024, 821);
         actionSome_menu_item = new QAction(TemplateWindowClass);
         actionSome_menu_item->setObjectName(QString::fromUtf8("actionSome_menu_item"));
         centralWidget = new QWidget(TemplateWindowClass);
@@ -62,7 +62,7 @@ public:
         TemplateWindowClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(TemplateWindowClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 950, 21));
+        menuBar->setGeometry(QRect(0, 0, 1024, 21));
         menuSome_menu = new QMenu(menuBar);
         menuSome_menu->setObjectName(QString::fromUtf8("menuSome_menu"));
         TemplateWindowClass->setMenuBar(menuBar);

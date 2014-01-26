@@ -33,7 +33,6 @@ Player::Player(QWidget *parent) :
 #endif
 }
 
-
 Player::~Player()
 {
 	// Do not delete m_pScene, its parent is ui.graphicsView, so it will be destroyed automatically

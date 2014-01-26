@@ -3,6 +3,8 @@
 #include "ARELScene.h"
 
 #include <metaioSDK/IARELInterpreter.h>
+#include <QMessageBox>
+#include <QDebug>
 
 
 ARELScene::ARELScene(QObject *parent, QStatusBar *statusBar) :
@@ -15,7 +17,7 @@ ARELScene::ARELScene(QObject *parent, QStatusBar *statusBar) :
 	QObject::connect(m_pWebView, SIGNAL(loadFinished(bool)), this, SLOT(loadFinished(bool)));
 	m_pWebView->hide();
 	addItem(m_pWebView);
-	m_pWebView->resize(640, 480);
+	m_pWebView->resize(m_viewportWidth, m_viewportHeight);
 
 	// Create the AREL interpreter
 	m_pArelInterpreter = metaio::CreateARELInterpreterQT(this, m_pWebView);
@@ -46,12 +48,16 @@ void ARELScene::afterMetaioSDKInitialized()
 	m_pArelInterpreter->registerCallback(this);
 }
 
+void ARELScene::resize()
+{
+	m_pWebView->resize(m_viewportWidth - 10, m_viewportHeight - 10);
+}
 
 void ARELScene::loadContent()
 {
-	// TODO: Load your own AREL file here
-
-	m_pArelInterpreter->loadARELFile(projectPath + "\\arelConfig.xml");
+	std::string configFilePath = projectPath + "\\arelConfig.xml";
+	qDebug(("Trying to load: " + configFilePath).c_str());
+	m_pArelInterpreter->loadARELFile(configFilePath);
 }
 
 

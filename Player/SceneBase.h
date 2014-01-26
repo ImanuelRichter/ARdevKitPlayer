@@ -1,6 +1,8 @@
 #ifndef SCENEBASE_H
 #define SCENEBASE_H
 
+#include <fstream>
+
 #include <QtGui/QGraphicsScene>
 #include <QStatusBar>
 
@@ -9,7 +11,7 @@
 
 #define IMAGE 0
 #define VIDEO 1
-#define CAMERA 3
+#define CAMERA 2
 
 namespace metaio
 {
@@ -60,12 +62,17 @@ protected:
 	int							mode;
 
 	/// Sets up the updateintervall
-	int						fps;
+	int							fps;
 
 	/**
 	 * Called directly after Metaio SDK was created and its renderer initialized
 	 */
 	virtual void afterMetaioSDKInitialized() {};
+
+	/**
+	* Resizes webView
+	*/
+	virtual void resize() {};
 
 	/**
 	 * QGraphicsScene inherited drawBackground function

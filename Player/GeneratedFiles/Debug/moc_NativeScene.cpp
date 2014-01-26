@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'NativeScene.h'
 **
-** Created: Tue 14. Jan 19:58:05 2014
+** Created: Sat 25. Jan 21:57:51 2014
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.4)
 **
 ** WARNING! All changes made in this file will be lost!

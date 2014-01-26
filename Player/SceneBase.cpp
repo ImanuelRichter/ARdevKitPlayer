@@ -87,7 +87,7 @@ void SceneBase::drawBackground(QPainter* painter, const QRectF& rect)
 		//       results, use m_pMetaioSDK->setCameraParameters(...) to load your own calibration
 		//       for the camera model you're using.
 		std::vector<metaio::Camera> cameras = m_pMetaioSDK->getCameraList();
-		if(cameras.size()>0)
+		if(cameras.size()>0 && mode == CAMERA)
 		{
 			// set the resolution to 640x480
 			cameras[0].resolution = metaio::Vector2di(640,480);
@@ -113,6 +113,8 @@ void SceneBase::drawBackground(QPainter* painter, const QRectF& rect)
 
 		m_viewportWidth = viewportWidth;
 		m_viewportHeight = viewportHeight;
+
+		resize();
 	}
 
 	// Enable anti-aliasing
@@ -126,8 +128,7 @@ void SceneBase::drawBackground(QPainter* painter, const QRectF& rect)
 		case (IMAGE):
 			if ((m_pMetaioSDK->setImage(testFilePath)) == metaio::Vector2di(0, 0))
 			{
-				std::string msg = "loading " + testFilePath + " failed";
-				qCritical(msg.c_str());
+				qCritical(("loading " + testFilePath + " failed").c_str());
 			}
 			break;
 		case (VIDEO):

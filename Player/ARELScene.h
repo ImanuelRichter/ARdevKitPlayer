@@ -43,6 +43,8 @@ private:
 
 	virtual void afterMetaioSDKInitialized() override;
 	
+	virtual void resize() override;
+
 	virtual void loadContent() override;
 
 	virtual void onSDKReady() override;
