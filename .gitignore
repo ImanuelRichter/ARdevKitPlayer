@@ -159,6 +159,7 @@ bin/
 Debug/
 lib/
 src/
+include/
 
 Player/Debug/
 Player/GeneratedFiles/
