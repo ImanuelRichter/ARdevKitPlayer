@@ -139,7 +139,7 @@ void SceneBase::drawBackground(QPainter* painter, const QRectF& rect)
 				frameCounter++;
 			}
 			else
-				frameCounter = 0;
+				frameCounter = 1;
 			break;
 		case (CAMERA):
 			break;
