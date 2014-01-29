@@ -1,4 +1,4 @@
-﻿Der Buildvorgang wurde am 29.01.2014 09:48:14 gestartet.
+﻿Der Buildvorgang wurde am 29.01.2014 15:10:44 gestartet.
      1>Projekt "D:\Dropbox\dev\ARdevKitPlayer\Player\Player.vcxproj" auf Knoten "2", build Ziel(e).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(299,5): warning MSB8004: Das Output-Verzeichnis endet nicht mit einem nachstehenden Schrägstrich. Der Schrägstrich wird in dieser Buildinstanz hinzugefügt, da er für die ordnungsgemäße Auswertung des Output-Verzeichnisses erforderlich ist.
      1>InitializeBuildStatus:
@@ -7,11 +7,10 @@
          Alle Ausgaben sind aktuell.
        ClCompile:
          Alle Ausgaben sind aktuell.
-         d:\Programme\Visual Studio 10.0\VC\bin\CL.exe /c /I..\include /I.\GeneratedFiles /I. /ID:\Programme\Qt\4.8.4\include /I.\GeneratedFiles\Debug /ID:\Programme\Qt\4.8.4\include\QtCore /ID:\Programme\Qt\4.8.4\include\QtGui /ID:\Programme\Qt\4.8.4\include\QtOpenGL /ID:\Programme\Qt\4.8.4\include\QtNetwork /ID:\Programme\Qt\4.8.4\include\QtWebKit /ID:\Programme\Qt\4.8.4\include\QtTest /Zi /nologo /W1 /WX- /Od /Oy- /D UNICODE /D WIN32 /D QT_LARGEFILE_SUPPORT /D QT_DLL /D QT_CORE_LIB /D QT_GUI_LIB /D QT_OPENGL_LIB /D QT_NETWORK_LIB /D QT_WEBKIT_LIB /D QT_PHONON_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t- /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\Player.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt SceneBase.cpp
-         SceneBase.cpp
+         Alle Ausgaben sind aktuell.
          Alle Ausgaben sind aktuell.
        Link:
-         d:\Programme\Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"..\Debug\\Player.exe" /NOLOGO /LIBPATH:..\bin /LIBPATH:D:\Programme\Qt\4.8.4\lib metaioSDKD.lib qtmaind.lib QtCored4.lib QtGuid4.lib QtOpenGLd4.lib opengl32.lib glu32.lib QtNetworkd4.lib QtWebKitd4.lib QtTestd4.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\Player.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\Dropbox\dev\ARdevKitPlayer\Debug\Player.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"..\Debug\Player.lib" /MACHINE:X86 Debug\ARELScene.obj
+         d:\Programme\Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"..\Debug\\Player.exe" /NOLOGO /LIBPATH:..\bin /LIBPATH:D:\Programme\Qt\4.8.4\lib metaioSDKD.lib qtmaind.lib QtCored4.lib QtGuid4.lib QtOpenGLd4.lib opengl32.lib glu32.lib QtNetworkd4.lib QtWebKitd4.lib QtTestd4.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\Player.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\Dropbox\dev\ARdevKitPlayer\Debug\Player.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"..\Debug\Player.lib" /MACHINE:X86 Debug\ARELScene.obj
          Debug\moc_ARELScene.obj
          Debug\moc_NativeScene.obj
          Debug\moc_Player.obj
@@ -33,4 +32,4 @@
 
 Das Erstellen war erfolgreich.
 
-Verstrichene Zeit 00:00:03.20
+Verstrichene Zeit 00:00:02.31

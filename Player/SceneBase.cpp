@@ -23,7 +23,7 @@ SceneBase::SceneBase(QObject *parent, QStatusBar *statusBar) :
 	m_viewportHeight(0)
 {
 	m_pStatusBar = statusBar;
-	frameCounter = 0;
+	frameCounter = 1;
 }
 
 SceneBase::~SceneBase()
