@@ -17,16 +17,16 @@ Install Guide:
 4. Copy the folder "metaioSDK" from [metaio sdk install folder]/_Windows/metaioSDK/include/ to [project folder]\include
 5. Download and install <a href"http://download.qt-project.org/archive/qt/4.8/4.8.4/">Qt 4.8.4</a>
 6. Copy at least the following files from [qt install folder]/bin to the output folder of the project:
-	-> QtCore4.dll
-	-> QtCored4.dll
-	-> QtGui4.dll
-	-> QtGuid4.dll
-	-> QtNetwork4.dll
-	-> QtNetworkd4.dll
-	-> QtOpenGL4.dll
-	-> QtOpenGLd4.dll
-	-> QtWebKit4.dll
-	-> QtWebKitd4.dll
+	* QtCore4.dll
+	* QtCored4.dll
+	* QtGui4.dll
+	* QtGuid4.dll
+	* QtNetwork4.dll
+	* QtNetworkd4.dll
+	* QtOpenGL4.dll
+	* QtOpenGLd4.dll
+	* QtWebKit4.dll
+	* QtWebKitd4.dll
 7. Download and install the VisualStudio plugin from <a href="http://download.qt-project.org/official_releases/vsaddin/qt-vs-addin-1.1.11-opensource.exe">here</a>
 
 After that you should be able to compile and debug the project.
