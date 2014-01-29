@@ -21,9 +21,7 @@ class Player : public QMainWindow
 public:
 	Player(QWidget *parent = 0);
 	~Player();
-	void setProjectPath(std::string path);
-	void setTestFilePath(std::string path);
-	void setMode(int mode);
+	void setConfig(std::string _projectPath, int _mode, std::string _testFilePath, int _fps);
 
 private:
 	Ui::TemplateWindowClass		ui;

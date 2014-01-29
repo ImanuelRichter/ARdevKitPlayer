@@ -6,7 +6,6 @@
 #include <QtGui/QApplication>
 #include <QMessageBox>
 
-
 int main(int argc, char *argv[])
 {
 	// Get resolution
@@ -28,7 +27,10 @@ int main(int argc, char *argv[])
 		height = atoi(tmp.c_str());
 		i++;
 	}
-	qDebug(res.c_str());
+	if (width == 0 && height == 0)
+		qDebug("Fullscreen");
+	else
+		qDebug(res.c_str());
 
 
 	// Get projectPath
@@ -42,13 +44,15 @@ int main(int argc, char *argv[])
 			projectPath += std::string(argv[i] + 1);
 			i++;
 		}
-		while (i < argc && ((std::string(argv[i])).length() > 2 && (argv[i][0] != '-' || argv[i][1] == ' ')));
+		while (i < argc && !((std::string(argv[i])).length() >= 2 && (argv[i][0] == '-')));
 	}
 	else
 		projectPath = "currentProject";
-	qDebug(("Project to load: " + projectPath).c_str());
-	
 	std::ifstream projectPathIsValid(projectPath);
+	if (projectPathIsValid)
+		qDebug(("Loading project form valid path: " + projectPath).c_str());
+	else
+		qDebug(("Invalid project file path: " + projectPath).c_str());
 	
 	// Get mode
 	int mode = CAMERA;
@@ -84,23 +88,26 @@ int main(int argc, char *argv[])
 				testFilePath += std::string(argv[i]);
 			i++;
 		}
-		while (i < argc && ((std::string(argv[i])).length() > 2 && (argv[i][0] != '-' || argv[i][1] == ' ')));
+		while (i < argc && !((std::string(argv[i])).length() >= 2 && (argv[i][0] == '-')));
 	}
-	else
-	{
-		switch (mode)
-		{
-			case (IMAGE) :
-				testFilePath = "..\\src\\test\\testImage.png";
-				break;
-			case (VIDEO) :
-				testFilePath = "..\\src\\test\\testVideo.mp4";
-			break;
-		}
-	}
-	qDebug(("Testfile: " + testFilePath).c_str());
-
 	std::ifstream testFilePathIsValid(testFilePath);
+	if (testFilePathIsValid)
+		qDebug(("Loading test file form valid path: " + testFilePath).c_str());
+	else if (testFilePath == "")
+		qDebug("No test file defined");
+	else
+		qDebug(("Invalid test file path: " + testFilePath).c_str());
+
+	// Get fps
+	int fps = 25;
+	if (i < argc)
+	{
+		fps = atoi(argv[i] + 1);
+		i++;
+	}
+	char fpsOut[3];
+	std::string suffix = std::string(itoa(fps, fpsOut, 10)) + " fps";
+	qDebug(("Starting with: " + suffix).c_str());
 
 	// Start app
 	QApplication a(argc, argv);
@@ -110,9 +117,7 @@ int main(int argc, char *argv[])
 	else
 		p.resize(width, height);
 
-	p.setProjectPath(projectPath);
-	p.setMode(mode);
-	p.setTestFilePath(testFilePath);
+	p.setConfig(projectPath, mode, testFilePath, fps);
 	p.show();
 	return a.exec();
 }

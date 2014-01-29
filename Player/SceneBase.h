@@ -27,9 +27,7 @@ class SceneBase : public QGraphicsScene, public metaio::IMetaioSDKCallback
 
 public:
 	virtual ~SceneBase();
-	void setProjectPath(std::string path);
-	void setTestFilePath(std::string path);
-	void setMode(int mode);
+	void setConfig(std::string _projectPath, int mode, std::string _testFilePath, int _fps);
 
 protected:
 	SceneBase(QObject *parent = 0, QStatusBar *statusBar = 0);
@@ -63,6 +61,10 @@ protected:
 
 	/// Sets up the updateintervall
 	int							fps;
+
+	int							frameCounter;
+
+	std::string					framePath;
 
 	/**
 	 * Called directly after Metaio SDK was created and its renderer initialized

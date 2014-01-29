@@ -33,22 +33,12 @@ Player::Player(QWidget *parent) :
 #endif
 }
 
+void Player::setConfig(std::string _projectPath, int _mode, std::string _testFilePath, int _fps)
+{
+	m_pScene->setConfig(_projectPath, _mode, _testFilePath, _fps);
+}
+
 Player::~Player()
 {
 	// Do not delete m_pScene, its parent is ui.graphicsView, so it will be destroyed automatically
-}
-
-void Player::setProjectPath(std::string path)
-{
-	m_pScene->setProjectPath(path);
-}
-
-void Player::setTestFilePath(std::string path)
-{
-	m_pScene->setTestFilePath(path);
-}
-
-void Player::setMode(int mode)
-{
-	m_pScene->setMode(mode);
 }

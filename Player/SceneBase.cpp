@@ -23,7 +23,7 @@ SceneBase::SceneBase(QObject *parent, QStatusBar *statusBar) :
 	m_viewportHeight(0)
 {
 	m_pStatusBar = statusBar;
-	fps = 25;
+	frameCounter = 0;
 }
 
 SceneBase::~SceneBase()
@@ -41,21 +41,13 @@ SceneBase::~SceneBase()
 	delete m_pGestureHandler;
 }
 
-void SceneBase::setProjectPath(std::string path)
+void SceneBase::setConfig(std::string _projectPath, int _mode, std::string _testFilePath, int _fps)
 {
-	projectPath = path;
-}
-
-void SceneBase::setTestFilePath(std::string path)
-{
-	testFilePath = path;
-}
-
-void SceneBase::setMode(int _mode)
-{
+	projectPath = _projectPath;
+	testFilePath = _testFilePath;
 	mode = _mode;
+	fps = _fps;
 }
-
 
 void SceneBase::drawBackground(QPainter* painter, const QRectF& rect)
 {
@@ -123,6 +115,12 @@ void SceneBase::drawBackground(QPainter* painter, const QRectF& rect)
 	glEnable(GL_LINE_SMOOTH);
 	
 	// Load image or video
+	framePath = testFilePath + "\\";
+	char key_char[20];
+	itoa(frameCounter, key_char, 10);
+	framePath += key_char;
+	framePath += ".png";
+	std::ifstream framePathIsValid(framePath);
 	switch (mode)
 	{
 		case (IMAGE):
@@ -132,7 +130,16 @@ void SceneBase::drawBackground(QPainter* painter, const QRectF& rect)
 			}
 			break;
 		case (VIDEO):
-			//TODO Implement code for using a video as source here
+			if (framePathIsValid && m_initialized)
+			{
+				if ((m_pMetaioSDK->setImage(framePath)) == metaio::Vector2di(0, 0))
+				{
+					qCritical(("loading " + framePath + " failed").c_str());
+				}
+				frameCounter++;
+			}
+			else
+				frameCounter = 0;
 			break;
 		case (CAMERA):
 			break;
