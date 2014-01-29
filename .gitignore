@@ -159,3 +159,6 @@ bin/*
 Debug/*
 lib/*
 src/*
+
+Player/Debug/*
+Player/GeneratedFiles/*
