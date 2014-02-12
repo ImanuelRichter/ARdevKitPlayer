@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 
-#include <fstream>
+#include "shlwapi.h"
 
 #include <QtGui/QApplication>
 #include <QMessageBox>
@@ -48,11 +48,7 @@ int main(int argc, char *argv[])
 	}
 	else
 		projectPath = "currentProject";
-	std::ifstream projectPathIsValid(projectPath);
-	if (projectPathIsValid)
-		qDebug(("Loading project form valid path: " + projectPath).c_str());
-	else
-		qDebug(("Invalid project file path: " + projectPath).c_str());
+		qDebug(("Trying to open project at: " + projectPath).c_str());
 	
 	// Get mode
 	int mode = CAMERA;
@@ -92,7 +88,7 @@ int main(int argc, char *argv[])
 	}
 	std::ifstream testFilePathIsValid(testFilePath);
 	if (testFilePathIsValid)
-		qDebug(("Loading test file form valid path: " + testFilePath).c_str());
+		qDebug(("Loading test file from valid path: " + testFilePath).c_str());
 	else if (testFilePath == "")
 		qDebug("No test file defined");
 	else
