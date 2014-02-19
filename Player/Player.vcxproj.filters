@@ -80,6 +80,15 @@
     <ClCompile Include="GeneratedFiles\Release\moc_SceneBase.cpp">
       <Filter>Generierte Dateien\Release</Filter>
     </ClCompile>
+    <ClCompile Include="ConnectionController.cpp">
+      <Filter>Source Dateien</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ConnectionController.cpp">
+      <Filter>Generierte Dateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ConnectionController.cpp">
+      <Filter>Generierte Dateien\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -106,6 +115,9 @@
       <Filter>Header Dateien</Filter>
     </CustomBuild>
     <CustomBuild Include="SceneBase.h">
+      <Filter>Header Dateien</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ConnectionController.h">
       <Filter>Header Dateien</Filter>
     </CustomBuild>
   </ItemGroup>
