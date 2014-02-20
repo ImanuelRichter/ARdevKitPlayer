@@ -28,6 +28,8 @@ private:
 	QThread t;
 	QUdpSocket * udpSocket;
 	QTcpServer  * tcpServer;
+	void handleProjectRequests(QTcpSocket * socket);
+	void handleDebugRequests(QTcpSocket * socket);
 	
 };
 

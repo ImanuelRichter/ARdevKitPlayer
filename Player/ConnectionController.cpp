@@ -38,11 +38,6 @@ void ConnectionController::incomingBroadcast()
 void ConnectionController::handleTcpRequest()
 {
 	QTcpSocket * socket = tcpServer->nextPendingConnection();
-	if(QFile::exists("currentProject.zip"))
-	{
-		QFile::remove("currentProject.zip");
-	}
-	QFile project("currentProject.zip");
 	while(socket->bytesAvailable() == 0)
 	{	
 		if(socket->waitForReadyRead(30000))
@@ -50,9 +45,37 @@ void ConnectionController::handleTcpRequest()
 			break;
 		}
 	}
-	QByteArray msgSizeBytes(8,0);
-	quint64 msgSize = 0;
-	msgSizeBytes = socket->read(8);
+	QByteArray cmdBuf(10, 0);
+	qint64 lineLength = socket->readLine(cmdBuf.data(), cmdBuf.length());
+    if (lineLength == -1) {
+        qDebug() << "an Error occured try to read the command";
+    }
+	if(cmdBuf.contains("project"))
+	{
+		this->handleProjectRequests(socket);
+		socket->write("OK");
+	}
+	if(cmdBuf.contains("debug"))
+	{
+		this->handleDebugRequests(socket);
+		socket->write("OK");
+	}
+	socket->flush();
+	socket->disconnectFromHost();
+	socket->close();
+	
+}
+
+void ConnectionController::handleProjectRequests(QTcpSocket * socket)
+{
+	if(QFile::exists("currentProject.zip"))
+	{
+		QFile::remove("currentProject.zip");
+	}
+	QFile project("currentProject.zip");
+	QByteArray msgSizeBytes(4,0);
+	quint32 msgSize = 0;
+	msgSizeBytes = socket->read(4);
 	for(int i = 0; i < msgSizeBytes.length(); ++i)
 	{
 		msgSizeBytes += (quint8)msgSizeBytes.at(i) << (8*i);
@@ -61,22 +84,28 @@ void ConnectionController::handleTcpRequest()
 	{
 		QByteArray buffer(1024*8, 0);
 		quint64 alreadyRead = 0;
+		quint64 currentlyRead = 0;
 		if(!socket->waitForReadyRead(50000))
 		{
-			qDebug() << "something went wrong!!";
+			qDebug() << "Connection Timed Out";
+			return;
 		}
 		if(!project.open(QIODevice::OpenModeFlag::WriteOnly))
 		{
+			qDebug() << "The requested File could not be accesed.";
 			return;
 		}
 		while(alreadyRead < msgSize)
 		{
-			quint64 testbytes = socket->bytesAvailable();
-			alreadyRead += socket->read(buffer.data(), 1024*8);
-			project.write(buffer, 1024*8);
+			currentlyRead = socket->read(buffer.data(), 1024*8);
+			project.write(buffer, currentlyRead);
+			alreadyRead += currentlyRead;
 		}
 		project.close();
 	}
-	socket->disconnectFromHost();
-	socket->close();
+}
+
+void ConnectionController::handleDebugRequests(QTcpSocket * socket)
+{
+
 }
