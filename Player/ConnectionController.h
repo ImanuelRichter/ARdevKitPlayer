@@ -8,6 +8,7 @@
 #include <qtcpsocket.h>
 #include <qfile.h>
 #include <qiodevice.h>
+//#include <JlCompress.h>
 
 class ConnectionController : public QObject
 {
@@ -29,8 +30,7 @@ private:
 	QUdpSocket * udpSocket;
 	QTcpServer  * tcpServer;
 	void handleProjectRequests(QTcpSocket * socket);
-	void handleDebugRequests(QTcpSocket * socket);
-	
+	void handleDebugRequests(QTcpSocket * socket);	
 };
 
 #endif // CONNECTIONCONTROLLER_H

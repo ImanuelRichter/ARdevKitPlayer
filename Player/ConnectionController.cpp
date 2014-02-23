@@ -37,13 +37,11 @@ void ConnectionController::incomingBroadcast()
 
 void ConnectionController::handleTcpRequest()
 {
-	QTcpSocket * socket = tcpServer->nextPendingConnection();
-	while(socket->bytesAvailable() == 0)
+	QTcpSocket * socket = tcpServer->nextPendingConnection();	
+	if(!socket->waitForReadyRead(30000))
 	{	
-		if(socket->waitForReadyRead(30000))
-		{	
-			break;
-		}
+		qDebug() <<"Client meldet sich nichtmehr";
+		return;
 	}
 	QByteArray cmdBuf(10, 0);
 	qint64 lineLength = socket->readLine(cmdBuf.data(), cmdBuf.length());
@@ -52,6 +50,7 @@ void ConnectionController::handleTcpRequest()
     }
 	if(cmdBuf.contains("project"))
 	{
+		qDebug() << socket->bytesAvailable();
 		this->handleProjectRequests(socket);
 		socket->write("OK");
 	}
@@ -63,49 +62,66 @@ void ConnectionController::handleTcpRequest()
 	socket->flush();
 	socket->disconnectFromHost();
 	socket->close();
-	
 }
 
 void ConnectionController::handleProjectRequests(QTcpSocket * socket)
 {
-	if(QFile::exists("currentProject.zip"))
+	if(QFile::exists(".\\currentProject.zip"))
 	{
-		QFile::remove("currentProject.zip");
+		QFile::remove(".\\currentProject.zip");
 	}
-	QFile project("currentProject.zip");
-	QByteArray msgSizeBytes(4,0);
-	quint32 msgSize = 0;
-	msgSizeBytes = socket->read(4);
-	for(int i = 0; i < msgSizeBytes.length(); ++i)
+	QFile project(".\\currentProject.zip");
+	QByteArray msgSizeBytes(8,0);
+	quint64 msgSize = 0;
+	if(socket->bytesAvailable() == 0)
 	{
-		msgSizeBytes += (quint8)msgSizeBytes.at(i) << (8*i);
+		if(!socket->waitForReadyRead(30000))
+		{	
+			qDebug() <<"Request was not completly sent";
+			return;
+		}	
+
+	}
+	for(int i = 0; msgSize < 8; ++i)
+	{
+		msgSize = socket->read(msgSizeBytes.data() + msgSize, 8 - msgSize);
+	}
+	msgSize = 0;
+	for(int i = 0; i < msgSizeBytes.size(); ++i)
+	{
+		msgSize += (quint8)msgSizeBytes.at(i) << (8*i);
 	}
 	if(msgSize > 0)
 	{
 		QByteArray buffer(1024*8, 0);
 		quint64 alreadyRead = 0;
 		quint64 currentlyRead = 0;
-		if(!socket->waitForReadyRead(50000))
-		{
-			qDebug() << "Connection Timed Out";
-			return;
-		}
-		if(!project.open(QIODevice::OpenModeFlag::WriteOnly))
+
+		if(!project.open(QIODevice::WriteOnly))
 		{
 			qDebug() << "The requested File could not be accesed.";
 			return;
 		}
 		while(alreadyRead < msgSize)
 		{
+			if(socket->bytesAvailable() == 0)
+			{
+				if(!socket->waitForReadyRead(30000))
+				{	
+					qDebug() <<"Project wurde nicht vollständig gesendet";
+					return;
+				}	
+			}
 			currentlyRead = socket->read(buffer.data(), 1024*8);
 			project.write(buffer, currentlyRead);
 			alreadyRead += currentlyRead;
 		}
 		project.close();
+		/*JlCompress::extractDir("currentProject.zip", "");*/
 	}
 }
 
 void ConnectionController::handleDebugRequests(QTcpSocket * socket)
 {
-
+	
 }
