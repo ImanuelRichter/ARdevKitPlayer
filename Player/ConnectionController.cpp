@@ -132,7 +132,7 @@ void ConnectionController::handleDebugRequests(QTcpSocket * socket)
 	f.open(QIODevice::ReadOnly);
 	while(socket->bytesAvailable() < 2)
 	{
-		if(f.waitForReadyRead(3000))
+		if(f.waitForReadyRead(10000))
 		{
 			socket->write(f.readLine());
 			socket->waitForBytesWritten();
