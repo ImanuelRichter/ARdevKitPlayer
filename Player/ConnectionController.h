@@ -8,7 +8,10 @@
 #include <qtcpsocket.h>
 #include <qfile.h>
 #include <qiodevice.h>
-//#include <JlCompress.h>
+#include <stdio.h>
+#include <quazip.h>
+#include <qdir.h>
+#include "JlCompress.h"
 
 class ConnectionController : public QObject
 {

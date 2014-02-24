@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Player.h"
-#include "ConnectionController.h"
 
 #include "shlwapi.h"
 
@@ -116,9 +115,6 @@ int main(int argc, char *argv[])
 
 	p.setConfig(projectPath, mode, testFilePath, fps);
 	p.show();
-
-	// Start ConnectionController
-	ConnectionController controller = new ConnectionController(0);
 
 	return a.exec();
 }

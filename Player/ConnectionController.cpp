@@ -117,11 +117,30 @@ void ConnectionController::handleProjectRequests(QTcpSocket * socket)
 			alreadyRead += currentlyRead;
 		}
 		project.close();
-		/*JlCompress::extractDir("currentProject.zip", "");*/
+		if(QDir("currentProject").exists())
+		{
+			QDir().remove("currentProject");
+		}
+		JlCompress::extractDir("currentProject.zip", "currentProject");
 	}
 }
 
 void ConnectionController::handleDebugRequests(QTcpSocket * socket)
 {
-	
+	freopen("debug_output_file", "w", stdout);
+	QFile f("debug_output_file");
+	f.open(QIODevice::ReadOnly);
+	while(socket->bytesAvailable() < 2)
+	{
+		if(f.waitForReadyRead(3000))
+		{
+			socket->write(f.readLine());
+			socket->waitForBytesWritten();
+		}
+	}
+	QByteArray result(socket->readAll());
+	if(!result.contains("OK"))
+	{
+		qDebug() << "failure on Debugcall";
+	}
 }

@@ -23,6 +23,9 @@ public:
 	~Player();
 	void setConfig(std::string _projectPath, int _mode, std::string _testFilePath, int _fps);
 
+public slots:
+	void reload();
+
 private:
 	Ui::TemplateWindowClass		ui;
 
