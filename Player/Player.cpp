@@ -50,7 +50,11 @@ Player::~Player()
 
 void Player::reload()
 {
-	ui.setupUi(this);
+	std::string projectPath = m_pScene->getProjectPath();
+	std::string testFilePath = m_pScene->getTestFilePath();
+	int mode = m_pScene->getMode();
+	int fps = m_pScene->getFps();
+	m_pScene->~SceneBase();
 
 #ifdef METAIO_SDK_NATIVE
 	m_pScene = new NativeScene(ui.graphicsView, ui.statusBar);
@@ -58,12 +62,12 @@ void Player::reload()
 	m_pScene = new ARELScene(ui.graphicsView, ui.statusBar);
 #endif
 
-	QGLWidget* glWidget = new QGLWidget(QGLFormat(QGL::SampleBuffers), ui.graphicsView);
 	ui.graphicsView->setScene(m_pScene);
-	ui.graphicsView->setViewport(glWidget);
 
 #ifndef METAIO_SDK_TEMPLATE_NATIVE
 	// If you want to disable the web view's context menu for an AREL scene, enable this line
 	ui.graphicsView->setContextMenuPolicy(Qt::NoContextMenu);
 #endif
+
+	setConfig(projectPath, mode, testFilePath, fps);
 }

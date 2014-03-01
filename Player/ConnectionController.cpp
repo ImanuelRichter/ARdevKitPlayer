@@ -122,20 +122,21 @@ void ConnectionController::handleProjectRequests(QTcpSocket * socket)
 			QDir().remove("currentProject");
 		}
 		JlCompress::extractDir("currentProject.zip", "currentProject");
+		emit newProject();
 	}
 }
 
 void ConnectionController::handleDebugRequests(QTcpSocket * socket)
 {
-	freopen("debug_output_file", "w", stdout);
-	QFile f("debug_output_file");
-	f.open(QIODevice::ReadOnly);
+	std::stringstream buffer;
+	std::streambuf * backup = std::cout.rdbuf(buffer.rdbuf());
 	while(socket->bytesAvailable() < 2)
 	{
-		if(f.waitForReadyRead(10000))
+		if(buffer.str().length() != 0)
 		{
-			socket->write(f.readLine());
+			socket->write(buffer.str().c_str());
 			socket->waitForBytesWritten();
+			buffer.str() = "";
 		}
 	}
 	QByteArray result(socket->readAll());
@@ -143,4 +144,5 @@ void ConnectionController::handleDebugRequests(QTcpSocket * socket)
 	{
 		qDebug() << "failure on Debugcall";
 	}
+	std::cout.rdbuf(backup);
 }

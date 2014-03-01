@@ -1,6 +1,8 @@
 #ifndef CONNECTIONCONTROLLER_H
 #define CONNECTIONCONTROLLER_H
 
+#include <iostream>
+#include <sstream>
 #include <QObject>
 #include <qthread.h>
 #include <qudpsocket.h>

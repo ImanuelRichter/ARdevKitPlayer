@@ -24,6 +24,7 @@ SceneBase::SceneBase(QObject *parent, QStatusBar *statusBar) :
 {
 	m_pStatusBar = statusBar;
 	frameCounter = 1;
+	SceneBase::configuered = false;
 }
 
 SceneBase::~SceneBase()
@@ -47,6 +48,7 @@ void SceneBase::setConfig(std::string _projectPath, int _mode, std::string _test
 	testFilePath = _testFilePath;
 	mode = _mode;
 	fps = _fps;
+	configuered = true;
 }
 
 void SceneBase::drawBackground(QPainter* painter, const QRectF& rect)
@@ -206,4 +208,24 @@ void SceneBase::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
 void SceneBase::onSDKReady()
 {
 	loadContent();
+}
+
+std::string SceneBase::getProjectPath()
+{
+	return projectPath;
+}
+
+int SceneBase::getMode()
+{
+	return mode;
+}
+
+std::string SceneBase::getTestFilePath()
+{
+	return testFilePath;
+}
+
+int SceneBase::getFps()
+{
+	return fps;
 }

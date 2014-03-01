@@ -28,6 +28,10 @@ class SceneBase : public QGraphicsScene, public metaio::IMetaioSDKCallback
 public:
 	virtual ~SceneBase();
 	void setConfig(std::string _projectPath, int mode, std::string _testFilePath, int _fps);
+	std::string getProjectPath();
+	int getMode();
+	std::string getTestFilePath();
+	int getFps();
 
 protected:
 	SceneBase(QObject *parent = 0, QStatusBar *statusBar = 0);
@@ -119,6 +123,9 @@ protected:
 	 * Perform the rendering. This will be different in native vs. AREL scene
 	 */
 	virtual void performRendering() = 0;
+
+private:
+	bool configuered;
 };
 
 #endif
