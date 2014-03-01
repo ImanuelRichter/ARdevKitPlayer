@@ -168,8 +168,8 @@ void SceneBase::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
 
 	// mouseEvent->screenPos() and mouseEvent->pos() seem to be always return (0,0) and scenePos()
 	// has its origin in the middle of the rendering pane
-	const int x = mouseEvent->scenePos().x() + (int)m_viewportWidth/2;
-	const int y = mouseEvent->scenePos().y() + (int)m_viewportHeight/2;
+	const int x = mouseEvent->scenePos().x();
+	const int y = mouseEvent->scenePos().y();
 
 	// Forward event to gesture handler (needed for drag gesture, just like the mouse press/release events)
 	if (m_pGestureHandler)
@@ -182,8 +182,8 @@ void SceneBase::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 	super::mousePressEvent(mouseEvent);
 
 	// See comment in mouseMoveEvent()
-	const int x = mouseEvent->scenePos().x() + (int)m_viewportWidth/2;
-	const int y = mouseEvent->scenePos().y() + (int)m_viewportHeight/2;
+	const int x = mouseEvent->scenePos().x();
+	const int y = mouseEvent->scenePos().y();
 
 	// Forward event to gesture handler
 	if (m_pGestureHandler)
@@ -196,8 +196,8 @@ void SceneBase::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
 	super::mouseReleaseEvent(mouseEvent);
 
 	// See comment in mouseMoveEvent()
-	const int x = mouseEvent->scenePos().x() + (int)m_viewportWidth/2;
-	const int y = mouseEvent->scenePos().y() + (int)m_viewportHeight/2;
+	const int x = mouseEvent->scenePos().x();
+	const int y = mouseEvent->scenePos().y();
 
 	// Forward event to gesture handler
 	if (m_pGestureHandler)
