@@ -42,13 +42,13 @@
      <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuSome_menu">
+   <widget class="QMenu" name="menu_file">
     <property name="title">
-     <string>Some menu</string>
+     <string>Datei</string>
     </property>
-    <addaction name="actionSome_menu_item"/>
+    <addaction name="menu_file_close"/>
    </widget>
-   <addaction name="menuSome_menu"/>
+   <addaction name="menu_file"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -59,9 +59,15 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionSome_menu_item">
+  <action name="menu_file_close">
    <property name="text">
-    <string>Some menu item</string>
+    <string>Beenden</string>
+   </property>
+   <property name="toolTip">
+    <string>Beendet das Programm</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
    </property>
   </action>
  </widget>
