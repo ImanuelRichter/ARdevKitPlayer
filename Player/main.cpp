@@ -4,10 +4,36 @@
 #include "shlwapi.h"
 
 #include <QtGui/QApplication>
-#include <QMessageBox>
+#include <iostream>
+#include <stdio.h>
+void myMessageOutput(QtMsgType type, const char * msg)
+{
+	switch(type)
+	{
+		case QtDebugMsg:
+			std::cout << "Debug: " << msg << "\n";
+			break;
+		
+		case QtWarningMsg:
+			std::cout << "Warning: " << msg <<"\n";
+			break;
+
+		case QtCriticalMsg:
+			std::cout << "Critical: " << msg <<"\n";
+			break;
+
+		case QtFatalMsg:
+			std::cout << "Fatal: " << msg <<"\n";
+			break;
+	}
+}
 
 int main(int argc, char *argv[])
 {
+	// Set qDebug putput to std
+	qInstallMsgHandler(myMessageOutput);
+	//freopen("debugLog.txt", "w", stdout);
+
 	// Get resolution
 	std::string res = "Resolution: ";
 	int i = 1;
