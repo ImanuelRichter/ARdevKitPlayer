@@ -52,16 +52,18 @@ void ConnectionController::handleTcpRequest()
 	if(cmdBuf.contains("project"))
 	{
 		this->handleProjectRequests(socket);
-		socket->write("OK");
 	}
 	if(cmdBuf.contains("debug"))
 	{
 		this->handleDebugRequests(socket);
-		socket->write("OK");
+		
 	}
-	
-	socket->flush();
-	socket->disconnectFromHost();
+	if(socket->state() == QAbstractSocket::ConnectedState)
+	{
+		socket->write("OK");
+		socket->flush();
+		socket->disconnectFromHost();
+	}	
 	socket->close();
 }
 
@@ -152,6 +154,12 @@ void ConnectionController::handleDebugRequests(QTcpSocket * socket)
 				socket->waitForBytesWritten();
 				bigOutBuf[i] = 0;
 			}
+		}
+		if(socket->waitForDisconnected(1000))
+		{
+			qDebug() << "disconnected from Host";
+			setbuf(stdout, NULL);
+			return;
 		}
 	}
 	//wait for response
