@@ -37,10 +37,11 @@ void ConnectionController::incomingBroadcast()
 
 void ConnectionController::handleTcpRequest()
 {
+	//generic handle method, which uses different methods 
 	QTcpSocket * socket = tcpServer->nextPendingConnection();	
 	if(!socket->waitForReadyRead(30000))
 	{	
-		qDebug() <<"Client meldet sich nichtmehr";
+		qDebug() <<"Client does not respond anymore";
 		return;
 	}
 	QByteArray cmdBuf(10, 0);
@@ -48,9 +49,8 @@ void ConnectionController::handleTcpRequest()
     if (lineLength == -1) {
         qDebug() << "an Error occured try to read the command";
     }
-	if(cmdBuf.contains("project"))
+	if(cmdBuf.contains("project0"))
 	{
-		qDebug() << socket->bytesAvailable();
 		this->handleProjectRequests(socket);
 		socket->write("OK");
 	}
@@ -59,6 +59,7 @@ void ConnectionController::handleTcpRequest()
 		this->handleDebugRequests(socket);
 		socket->write("OK");
 	}
+	
 	socket->flush();
 	socket->disconnectFromHost();
 	socket->close();
@@ -66,6 +67,7 @@ void ConnectionController::handleTcpRequest()
 
 void ConnectionController::handleProjectRequests(QTcpSocket * socket)
 {
+	//check if file to write to exist already
 	if(QFile::exists(".\\currentProject.zip"))
 	{
 		QFile::remove(".\\currentProject.zip");
@@ -73,6 +75,7 @@ void ConnectionController::handleProjectRequests(QTcpSocket * socket)
 	QFile project(".\\currentProject.zip");
 	QByteArray msgSizeBytes(8,0);
 	quint64 msgSize = 0;
+	//wait for remote socket to write on stream
 	if(socket->bytesAvailable() == 0)
 	{
 		if(!socket->waitForReadyRead(30000))
@@ -80,13 +83,14 @@ void ConnectionController::handleProjectRequests(QTcpSocket * socket)
 			qDebug() <<"Request was not completly sent";
 			return;
 		}	
-
 	}
+	//read all bytes for project length
 	for(int i = 0; msgSize < 8; ++i)
 	{
 		msgSize = socket->read(msgSizeBytes.data() + msgSize, 8 - msgSize);
 	}
 	msgSize = 0;
+	//calc Project length
 	for(int i = 0; i < msgSizeBytes.size(); ++i)
 	{
 		msgSize += (quint8)msgSizeBytes.at(i) << (8*i);
@@ -99,16 +103,17 @@ void ConnectionController::handleProjectRequests(QTcpSocket * socket)
 
 		if(!project.open(QIODevice::WriteOnly))
 		{
-			qDebug() << "The requested File could not be accesed.";
+			qDebug() << "The requested File could not be accessed.";
 			return;
 		}
+		//try to read from stream and write to file
 		while(alreadyRead < msgSize)
 		{
 			if(socket->bytesAvailable() == 0)
 			{
 				if(!socket->waitForReadyRead(30000))
 				{	
-					qDebug() <<"Project wurde nicht vollständig gesendet";
+					qDebug() <<"Project was not send succesfully";
 					return;
 				}	
 			}
@@ -121,6 +126,7 @@ void ConnectionController::handleProjectRequests(QTcpSocket * socket)
 		{
 			QDir().remove("currentProject");
 		}
+		//unzip Project and restart Player
 		JlCompress::extractDir("currentProject.zip", "currentProject");
 		emit newProject();
 	}
@@ -128,21 +134,36 @@ void ConnectionController::handleProjectRequests(QTcpSocket * socket)
 
 void ConnectionController::handleDebugRequests(QTcpSocket * socket)
 {
-	std::stringstream buffer;
-	std::streambuf * backup = std::cout.rdbuf(buffer.rdbuf());
+	//initialise Buffer for stdout
+	char bigOutBuf[8192];
+	memset(bigOutBuf, 0, 8192);
+
+	//set as stdoutBuffer
+	fflush(stdout);
+	setvbuf(stdout, bigOutBuf, _IOFBF, 8192);
+	int i = 0;
 	while(socket->bytesAvailable() < 2)
 	{
-		if(buffer.str().length() != 0)
+		for(int i = 0; i < 8192; ++i)
 		{
-			socket->write(buffer.str().c_str());
-			socket->waitForBytesWritten();
-			buffer.str() = "";
+			if(bigOutBuf[i]!=0)
+			{
+				socket->write(&bigOutBuf[i], 1);
+				socket->waitForBytesWritten();
+				bigOutBuf[i] = 0;
+			}
 		}
 	}
+	//wait for response
 	QByteArray result(socket->readAll());
-	if(!result.contains("OK"))
+	if(result.contains("OK"))
 	{
-		qDebug() << "failure on Debugcall";
+		qDebug() << "Debugcall successfully finished";
 	}
-	std::cout.rdbuf(backup);
+	else
+	{
+		qDebug() << "Debugcall not succesfully finished";
+	}
+	//restore normal stdout buffer
+	setbuf(stdout, NULL);
 }
