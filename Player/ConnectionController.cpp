@@ -49,7 +49,7 @@ void ConnectionController::handleTcpRequest()
     if (lineLength == -1) {
         qDebug() << "an Error occured try to read the command";
     }
-	if(cmdBuf.contains("project0"))
+	if(cmdBuf.contains("project"))
 	{
 		this->handleProjectRequests(socket);
 		socket->write("OK");

@@ -11,19 +11,19 @@ void myMessageOutput(QtMsgType type, const char * msg)
 	switch(type)
 	{
 		case QtDebugMsg:
-			std::cout << "Debug: " << msg << "\n";
+			fprintf(stdout,"Debug: %s\n", msg);
 			break;
 		
 		case QtWarningMsg:
-			std::cout << "Warning: " << msg <<"\n";
+			fprintf(stdout,"Warning: %s\n", msg);
 			break;
 
 		case QtCriticalMsg:
-			std::cout << "Critical: " << msg <<"\n";
+			fprintf(stdout,"Critical: %s\n", msg);
 			break;
 
 		case QtFatalMsg:
-			std::cout << "Fatal: " << msg <<"\n";
+			fprintf(stdout,"Fatal: %s\n", msg);
 			break;
 	}
 }
@@ -32,7 +32,6 @@ int main(int argc, char *argv[])
 {
 	// Set qDebug putput to std
 	qInstallMsgHandler(myMessageOutput);
-	//freopen("debugLog.txt", "w", stdout);
 
 	// Get resolution
 	std::string res = "Resolution: ";
