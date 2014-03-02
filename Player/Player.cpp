@@ -21,6 +21,7 @@ Player::Player(QWidget *parent) :
 	connect(controller, SIGNAL(newProject()), this, SLOT(reload()));
 
 	ui.setupUi(this);
+	connect(ui.menu_file_close, SIGNAL(triggered()), this, SLOT(close()));
 
 #ifdef METAIO_SDK_NATIVE
 	m_pScene = new NativeScene(ui.graphicsView, ui.statusBar);
