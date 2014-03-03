@@ -15,6 +15,11 @@
 #include <qdir.h>
 #include "JlCompress.h"
 
+/// <summary>
+/// this class offers methods for listening to the local network
+/// in order to accept incoming Files, or send DebugInformation,
+/// which are redirected from stdout.
+/// </summary>
 class ConnectionController : public QObject
 {
 	Q_OBJECT

@@ -6,6 +6,12 @@
 #include <QtGui/QApplication>
 #include <iostream>
 #include <stdio.h>
+
+/// <summary>
+/// Implements a new message handler for the qDebug() call.
+/// </summary>
+/// <param name="type">The type of the message</param>
+/// <param name="msg">The MSG, as string</param>
 void myMessageOutput(QtMsgType type, const char * msg)
 {
 	switch(type)
@@ -28,6 +34,13 @@ void myMessageOutput(QtMsgType type, const char * msg)
 	}
 }
 
+/// <summary>
+/// Main.
+/// </summary>
+/// <param name="argc">The argc.</param>
+/// <param name="argv">The argv, containing Resolution, projectPath,
+///		execution mode [IMAGE/VIDEO/CAMERA], testFilePath, fps</param>
+/// <returns>the exit code of the application</returns>
 int main(int argc, char *argv[])
 {
 	// Set qDebug putput to std

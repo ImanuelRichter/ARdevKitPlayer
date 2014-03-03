@@ -1,6 +1,12 @@
 #include "StdAfx.h"
 #include "ConnectionController.h"
 
+/// <summary>
+/// Starts the requiered sockets and bides some of them to
+/// the ports, on which they listen on.
+/// </summary>
+/// <param name="parent">The parent.</param>
+/// <returns></returns>
 ConnectionController::ConnectionController(QObject *parent)
 	: QObject(parent)
 {
@@ -14,6 +20,9 @@ ConnectionController::ConnectionController(QObject *parent)
     t.start();
 }
 
+/// <summary>
+/// Finalizes an instance of the <see cref="ConnectionController"/> class.
+/// </summary>
 ConnectionController::~ConnectionController()
 {
 	udpSocket->close();
@@ -22,6 +31,9 @@ ConnectionController::~ConnectionController()
     t.wait();
 }
 
+/// <summary>
+/// Reacts to a incoming UDP broadcast. 
+/// </summary>
 void ConnectionController::incomingBroadcast()
 {
 	QByteArray sendmsg = QByteArray("OK:12345");
@@ -35,6 +47,11 @@ void ConnectionController::incomingBroadcast()
 	udpSocket->writeDatagram(sendmsg, sender, senderPort); 
 }
 
+/// <summary>
+/// Handles a TCP request by analysing the sent command and uses the 
+/// dedicated method for either a project send or a debug request.
+/// It sends a  positive response on success and closes the sockets afterwards. 
+/// </summary>
 void ConnectionController::handleTcpRequest()
 {
 	//generic handle method, which uses different methods 
@@ -67,6 +84,11 @@ void ConnectionController::handleTcpRequest()
 	socket->close();
 }
 
+/// <summary>
+/// Handles the project requests, by saving the data, unzipping the package and
+/// restarting the Player in order to show the project
+/// </summary>
+/// <param name="socket">The remote socket, which sends the project</param>
 void ConnectionController::handleProjectRequests(QTcpSocket * socket)
 {
 	//check if file to write to exist already
@@ -134,6 +156,11 @@ void ConnectionController::handleProjectRequests(QTcpSocket * socket)
 	}
 }
 
+/// <summary>
+/// Handles the debug requests, by writing the buffer of stdout to 
+/// the networking socket, until a message is received.
+/// </summary>
+/// <param name="socket">The socket, which receives the debuginformation</param>
 void ConnectionController::handleDebugRequests(QTcpSocket * socket)
 {
 	//initialise Buffer for stdout
