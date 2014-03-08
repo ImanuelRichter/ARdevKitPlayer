@@ -17,7 +17,7 @@ Player::Player(QWidget *parent) :
 	m_pScene(0)
 {
 	// Start ConnectionController
-	ConnectionController * controller = new ConnectionController(0);
+	ConnectionController *controller = new ConnectionController(0);
 	connect(controller, SIGNAL(newProject()), this, SLOT(reload()));
 
 	ui.setupUi(this);

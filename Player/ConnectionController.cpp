@@ -12,10 +12,11 @@ ConnectionController::ConnectionController(QObject *parent)
 {
 	udpSocket = new QUdpSocket(this);
 	tcpServer = new QTcpServer(this);
-	udpSocket->bind(QHostAddress::Any, 12345);
+	port = 12345;
+	udpSocket->bind(QHostAddress::Any, port);
 	connect(udpSocket, SIGNAL(readyRead()), this, SLOT(incomingBroadcast()));
 	connect(tcpServer, SIGNAL(newConnection()), this, SLOT(handleTcpRequest()));
-	tcpServer->listen(QHostAddress::Any, 12345);
+	tcpServer->listen(QHostAddress::Any, port);
 	moveToThread(&t);
     t.start();
 }
@@ -36,7 +37,11 @@ ConnectionController::~ConnectionController()
 /// </summary>
 void ConnectionController::incomingBroadcast()
 {
-	QByteArray sendmsg = QByteArray("OK:12345");
+	char portCharArray[5];
+	itoa(port, portCharArray, 10);	
+	std::string msg = "OK:" + std::string(portCharArray);
+
+	QByteArray sendmsg = QByteArray(msg.c_str());
 	QByteArray buffer;
 	buffer.resize(udpSocket->pendingDatagramSize());
 
@@ -55,10 +60,10 @@ void ConnectionController::incomingBroadcast()
 void ConnectionController::handleTcpRequest()
 {
 	//generic handle method, which uses different methods 
-	QTcpSocket * socket = tcpServer->nextPendingConnection();	
+	QTcpSocket* socket = tcpServer->nextPendingConnection();	
 	if(!socket->waitForReadyRead(30000))
 	{	
-		qDebug() <<"Client does not respond anymore";
+		qDebug() << "Client does not respond anymore";
 		return;
 	}
 	QByteArray cmdBuf(10, 0);
@@ -104,7 +109,7 @@ void ConnectionController::handleProjectRequests(QTcpSocket * socket)
 	{
 		if(!socket->waitForReadyRead(30000))
 		{	
-			qDebug() <<"Request was not completly sent";
+			qDebug() << "Request was not completly sent";
 			return;
 		}	
 	}
@@ -137,7 +142,7 @@ void ConnectionController::handleProjectRequests(QTcpSocket * socket)
 			{
 				if(!socket->waitForReadyRead(30000))
 				{	
-					qDebug() <<"Project was not send succesfully";
+					qDebug() << "Project was not send succesfully";
 					return;
 				}	
 			}

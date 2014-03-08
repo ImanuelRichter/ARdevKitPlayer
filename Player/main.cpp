@@ -43,7 +43,7 @@ void myMessageOutput(QtMsgType type, const char * msg)
 /// <returns>the exit code of the application</returns>
 int main(int argc, char *argv[])
 {
-	// Set qDebug putput to std
+	// Set qDebug output to std
 	qInstallMsgHandler(myMessageOutput);
 
 	// Get resolution

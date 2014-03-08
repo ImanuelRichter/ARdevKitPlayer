@@ -37,10 +37,11 @@ signals:
 
 private:
 	QThread t;
-	QUdpSocket * udpSocket;
-	QTcpServer  * tcpServer;
-	void handleProjectRequests(QTcpSocket * socket);
-	void handleDebugRequests(QTcpSocket * socket);	
+	QUdpSocket* udpSocket;
+	QTcpServer* tcpServer;
+	int port;
+	void handleProjectRequests(QTcpSocket *socket);
+	void handleDebugRequests(QTcpSocket *socket);	
 };
 
 #endif // CONNECTIONCONTROLLER_H
