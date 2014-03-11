@@ -42,6 +42,13 @@ SceneBase::~SceneBase()
 	delete m_pGestureHandler;
 }
 
+/// <summary>
+/// Sets the configuration passed to the player.
+/// </summary>
+/// <param name="_projectPath">The _project path.</param>
+/// <param name="_mode">The _mode.</param>
+/// <param name="_testFilePath">The _test file path.</param>
+/// <param name="_fps">The _FPS.</param>
 void SceneBase::setConfig(std::string _projectPath, int _mode, std::string _testFilePath, int _fps)
 {
 	projectPath = _projectPath;
@@ -63,6 +70,7 @@ void SceneBase::drawBackground(QPainter* painter, const QRectF& rect)
 	const unsigned int viewportWidth = (unsigned int)(0 < rect.width() ? rect.width() : 0);
 	const unsigned int viewportHeight = (unsigned int)(0 < rect.height() ? rect.height() : 0);
 
+	// The original methods replaced through the stuff above
 	//const unsigned int viewportWidth = (unsigned int)max(0, rect.width());
 	//const unsigned int viewportHeight = (unsigned int)max(0, rect.height());
 

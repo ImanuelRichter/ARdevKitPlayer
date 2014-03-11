@@ -39,6 +39,13 @@ Player::Player(QWidget *parent) :
 #endif
 }
 
+/// <summary>
+/// Sets the configuration passed to the player.
+/// </summary>
+/// <param name="_projectPath">The _project path.</param>
+/// <param name="_mode">The _mode.</param>
+/// <param name="_testFilePath">The _test file path.</param>
+/// <param name="_fps">The _FPS.</param>
 void Player::setConfig(std::string _projectPath, int _mode, std::string _testFilePath, int _fps)
 {
 	m_pScene->setConfig(_projectPath, _mode, _testFilePath, _fps);

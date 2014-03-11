@@ -151,6 +151,7 @@ int main(int argc, char *argv[])
 	else
 		p.resize(width, height);
 
+	// Pass configurations
 	p.setConfig(projectPath, mode, testFilePath, fps);
 	p.show();
 
