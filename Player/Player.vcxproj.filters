@@ -55,9 +55,6 @@
     <ClCompile Include="SceneBase.cpp">
       <Filter>Source Dateien</Filter>
     </ClCompile>
-    <ClCompile Include="ConnectionController.cpp">
-      <Filter>Source Dateien</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Dateien</Filter>
     </ClCompile>
@@ -109,6 +106,18 @@
     <ClCompile Include="GeneratedFiles\qrc_Player.cpp">
       <Filter>Generierte Dateien</Filter>
     </ClCompile>
+    <ClCompile Include="ConnectionController.cpp">
+      <Filter>Source Dateien</Filter>
+    </ClCompile>
+    <ClCompile Include="ConnectionControllerTest.cpp">
+      <Filter>Source Dateien</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerTest.cpp">
+      <Filter>Source Dateien</Filter>
+    </ClCompile>
+    <ClCompile Include="TestMain.cpp">
+      <Filter>Source Dateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -117,11 +126,11 @@
     <ClInclude Include="ConnectionControllerTest.h">
       <Filter>Header Dateien</Filter>
     </ClInclude>
-    <ClInclude Include="main.h">
-      <Filter>Header Dateien</Filter>
-    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_Player.h">
       <Filter>Generierte Dateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TestMain.h">
+      <Filter>Header Dateien</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
