@@ -1,0 +1,1 @@
+http://blogs.msdn.com/b/cellfish/archive/2008/11/16/native-c-code-coverage-reports-using-visual-studio-2008-team-system.aspx
