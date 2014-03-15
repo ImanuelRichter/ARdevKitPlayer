@@ -157,3 +157,8 @@ int main(int argc, char *argv[])
 
 	return a.exec();
 }
+
+int TestMain(int argc, char *argv[])
+{
+	return main(argc, argv);
+}

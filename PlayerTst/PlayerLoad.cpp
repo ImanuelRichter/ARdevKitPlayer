@@ -1,23 +1,24 @@
-#include <..\\Player\\main.h>
-#include "gtest\gtest.h"
+//#include <..\\Player\\Player.h>
+#include "gtest/gtest.h"
+#include "main.h"
 #include <windows.h>
 
 
 TEST(LoadTest, LoadNothing)
 {
-	main(0, 0);
+	TestMain(0,0);
 	int msgboxID = MessageBox(NULL, "Wurde der Player gestartet, aber nichts angezeigt?", "LoadNothingTest", MB_YESNO | MB_ICONEXCLAMATION | MB_TOPMOST);
 
 	switch (msgboxID)
 	{
 	case IDNO:
-		ASSERT_TRUE(FALSE);
+		EXPECT_TRUE(FALSE);
 		break;
 	case IDYES:
-		ASSERT_TRUE(TRUE);
+		EXPECT_TRUE(TRUE);
 		break;
 	case 0:
-		ASSERT_TRUE(FALSE);
+		EXPECT_TRUE(FALSE);
 		break;
 	}
 }

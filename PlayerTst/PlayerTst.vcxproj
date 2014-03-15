@@ -37,20 +37,22 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>D:\Programming\TestingPlayer\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>D:\Programming\TestingPlayer\Debug;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\Player;..\Player\include;..\Player\GeneratedFiles;$(QTDIR)\include;..\Player\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebKit;$(QTDIR)\include\QtTest;..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>gtestd.lib;gtest_main-mdd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>metaioSDKD.lib;QtCored4.lib;QtGuid4.lib;QtOpenGLd4.lib;opengl32.lib;glu32.lib;QtNetworkd4.lib;QtWebKitd4.lib;QtTestd4.lib;quazip.lib;gtestd.lib;gtest_main-mdd.lib;%(AdditionalDependencies)gtestd.lib;Player.exe.lib;qtmaind.lib</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>..\Debug;$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -67,12 +69,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="PlayerLoad.cpp" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Player\Player.vcxproj">
       <Project>{d043d77e-ca71-429d-a01f-43b191131f08}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="PlayerLoad.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

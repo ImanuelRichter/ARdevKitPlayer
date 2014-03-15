@@ -73,10 +73,13 @@
     <Link>
       <SubSystem>NotSet</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
-      <AdditionalLibraryDirectories>..\Debug;$(QTDIR)\lib;.\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\Debug;$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>metaioSDKD.lib;qtmaind.lib;QtCored4.lib;QtGuid4.lib;QtOpenGLd4.lib;opengl32.lib;glu32.lib;QtNetworkd4.lib;QtWebKitd4.lib;QtTestd4.lib;quazip.lib;gtestd.lib;gtest_main-mdd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>lib /NOLOGO /OUT:"$(TargetPath).lib" "$(ProjectDir)\$(Configuration)\*.obj"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">
     <ClCompile>
