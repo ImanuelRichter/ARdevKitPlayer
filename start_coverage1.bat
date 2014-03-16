@@ -1,0 +1,2 @@
+"C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Performance Tools\vsinstr.exe" Player.exe /COVERAGE
+"C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Performance Tools\VSPerfMon.exe" /COVERAGE /OUTPUT:coverageReport
