@@ -24,10 +24,10 @@ namespace {
 		switch (msgboxID1)
 		{
 		case IDNO:
-			msgboxID2 =	MessageBox(NULL, (LPCWSTR)L"Wurde der Player gestartet, aber ein schwarzer Bildschirm angezeigt?", (LPCWSTR)L"LoadNothingTest", MB_YESNO | MB_ICONEXCLAMATION | MB_TOPMOST);
+			msgboxID2 =	MessageBox(NULL, (LPCWSTR)L"Wurde der Player im Fullscreen gestartet, aber ein schwarzer Bildschirm angezeigt?", (LPCWSTR)L"LoadNothingTest", MB_YESNO | MB_ICONEXCLAMATION | MB_TOPMOST);
 			break;
 		case IDYES:
-			msgboxID2 =	MessageBox(NULL, (LPCWSTR)L"Wurde der Player gestartet, und das aktuelle Bild ihrer Webcam angezeigt?", (LPCWSTR)L"LoadNothingTest", MB_YESNO | MB_ICONEXCLAMATION | MB_TOPMOST);	
+			msgboxID2 =	MessageBox(NULL, (LPCWSTR)L"Wurde der Player im Fullscreen gestartet, und das aktuelle Bild ihrer Webcam angezeigt?", (LPCWSTR)L"LoadNothingTest", MB_YESNO | MB_ICONEXCLAMATION | MB_TOPMOST);	
 			break;
 		case 0:
 			EXPECT_TRUE(FALSE);
@@ -94,12 +94,12 @@ namespace {
 		testFile.append(_pgmptr);
 		testFile.erase(testFile.find_last_of("\\", std::string::npos), std::string::npos);
 		testFile.append("\\testFiles\\videos\\imageVideo\\");
-		char fps[] = "-1";
+		char fps[] = "-2";
 		char* argv[] = {&name[0], &width[0], &height[0], &projectPath[0], &mode[0], &testFile[0], &fps[0], NULL};
 		int argc = (int)(sizeof(argv) / sizeof(argv[0])) - 1;
 
 		init(argc, argv);
-		int msgboxID = MessageBox(NULL, (LPCWSTR)L"Wurde der Player in einem 800x600 Pixel groﬂen Fenster mit einem Video von dem MetaioMan als Hintergrundbild mit einem fps gestartet?", (LPCWSTR)L"LoadNothingTest", MB_YESNO | MB_ICONEXCLAMATION | MB_TOPMOST);	
+		int msgboxID = MessageBox(NULL, (LPCWSTR)L"Wurde der Player in einem 800x600 Pixel groﬂen Fenster mit einem Video von dem MetaioMan als Hintergrundbild mit zwei fps gestartet?", (LPCWSTR)L"LoadNothingTest", MB_YESNO | MB_ICONEXCLAMATION | MB_TOPMOST);	
 
 		switch (msgboxID)
 		{
@@ -167,7 +167,7 @@ namespace {
 		int argc = (int)(sizeof(argv) / sizeof(argv[0])) - 1;
 
 		init(argc, argv);
-		int msgboxID = MessageBox(NULL, (LPCWSTR)L"Wurde der Player in einem 800x600 Pixel groﬂen Fenster mit einem schwarzen Hintergrundbild gestartet und die Fehlermeldung: \" Debug: Invalid test file path: [individuellerPfad]\\testFiles\\images\\IDMarker-001.png \" ausgegeben", (LPCWSTR)L"LoadNothingTest", MB_YESNO | MB_ICONEXCLAMATION | MB_TOPMOST);	
+		int msgboxID = MessageBox(NULL, (LPCWSTR)L"Wurde der Player in einem 800x600 Pixel groﬂen Fenster mit einem schwarzen Hintergrundbild gestartet und die Fehlermeldung: \"Debug: Invalid test file path: [individuellerPfad]\\testFiles\\images\\IDMarker-001.png \" ausgegeben", (LPCWSTR)L"LoadNothingTest", MB_YESNO | MB_ICONEXCLAMATION | MB_TOPMOST);	
 
 		switch (msgboxID)
 		{
@@ -204,7 +204,7 @@ namespace {
 		int argc = (int)(sizeof(argv) / sizeof(argv[0])) - 1;
 
 		init(argc, argv);
-		int msgboxID = MessageBox(NULL, (LPCWSTR)L"Wurde der Player in einem 800x800 Pixel groﬂen Fenster mit dem IDMarker1 als Hintergrundbild gestartet und Szene1 aus dem  angezeigt.", (LPCWSTR)L"LoadNothingTest", MB_YESNO | MB_ICONEXCLAMATION | MB_TOPMOST);	
+		int msgboxID = MessageBox(NULL, (LPCWSTR)L"Wurde der Player in einem 800x800 Pixel groﬂen Fenster mit dem IDMarker1 als Hintergrundbild gestartet und Szene1 aus dem IDMarkerProject angezeigt?", (LPCWSTR)L"LoadNothingTest", MB_YESNO | MB_ICONEXCLAMATION | MB_TOPMOST);	
 
 		switch (msgboxID)
 		{
@@ -241,7 +241,7 @@ namespace {
 		int argc = (int)(sizeof(argv) / sizeof(argv[0])) - 1;
 
 		init(argc, argv);
-		int msgboxID = MessageBox(NULL, (LPCWSTR)L"Wurde der Player in einem 800x600 Pixel groﬂen Fenster mit dem IDMarkerVideo als Hintergrund gestartet und Szenen wie diese angezeigt:", (LPCWSTR)L"LoadNothingTest", MB_YESNO | MB_ICONEXCLAMATION | MB_TOPMOST);	
+		int msgboxID = MessageBox(NULL, (LPCWSTR)L"Wurde der Player in einem 800x600 Pixel groﬂen Fenster mit dem IDMarkerVideo als Hintergrund gestartet und alle Szenen des IDMarkerProject korrekt dargestellt?", (LPCWSTR)L"LoadNothingTest", MB_YESNO | MB_ICONEXCLAMATION | MB_TOPMOST);	
 
 		switch (msgboxID)
 		{
@@ -316,7 +316,7 @@ namespace {
 		int argc = (int)(sizeof(argv) / sizeof(argv[0])) - 1;
 
 		init(argc, argv);
-		int msgboxID = MessageBox(NULL, (LPCWSTR)L"Wurde der Player in einem 800x600 Pixel groﬂen Fenster mit dem Markerless001 als Hintergrundbild gestartet und Szene 1 des ImageTrackableProjects korrekt darauf angewendet?", (LPCWSTR)L"LoadNothingTest", MB_YESNO | MB_ICONEXCLAMATION | MB_TOPMOST);	
+		int msgboxID = MessageBox(NULL, (LPCWSTR)L"Wurde der Player in einem 800x600 Pixel groﬂen Fenster mit dem Markerless001 als Hintergrundbild gestartet und Szene 1 des ImageTrackableProjects korrekt darauf dargestellt?", (LPCWSTR)L"LoadNothingTest", MB_YESNO | MB_ICONEXCLAMATION | MB_TOPMOST);	
 
 		switch (msgboxID)
 		{
