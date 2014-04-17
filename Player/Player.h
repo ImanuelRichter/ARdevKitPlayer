@@ -23,13 +23,15 @@ public:
 	~Player();
 	void setConfig(std::string _projectPath, int _mode, std::string _testFilePath, int _fps);
 
+	SceneBase*					m_pScene;
 public slots:
 	void reload();
+	void reload(std::string _projectPath, int _mode, std::string _testFilePath, int _fps);
 
 private:
 	Ui::TemplateWindowClass		ui;
 
-	SceneBase*					m_pScene;
+	
 };
 
 #endif // TEMPLATEWINDOW_H

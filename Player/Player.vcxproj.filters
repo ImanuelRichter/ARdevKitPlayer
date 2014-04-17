@@ -156,4 +156,7 @@
       <Filter>Header Dateien</Filter>
     </CustomBuild>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram11.cd" />
+  </ItemGroup>
 </Project>

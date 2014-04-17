@@ -16,13 +16,14 @@ Player::Player(QWidget *parent) :
 	QMainWindow(parent),
 	m_pScene(0)
 {
+	
 	// Start ConnectionController
 	ConnectionController *controller = new ConnectionController(0);
 	connect(controller, SIGNAL(newProject()), this, SLOT(reload()));
 
 	ui.setupUi(this);
 	connect(ui.menu_file_close, SIGNAL(triggered()), this, SLOT(close()));
-
+	this->
 #ifdef METAIO_SDK_NATIVE
 	m_pScene = new NativeScene(ui.graphicsView, ui.statusBar);
 #else
@@ -53,6 +54,7 @@ void Player::setConfig(std::string _projectPath, int _mode, std::string _testFil
 
 Player::~Player()
 {
+	ui.graphicsView->~QGraphicsView();
 	// Do not delete m_pScene, its parent is ui.graphicsView, so it will be destroyed automatically
 }
 
@@ -78,4 +80,23 @@ void Player::reload()
 #endif
 
 	setConfig(projectPath, mode, testFilePath, fps);
+}
+
+void Player::reload(std::string _projectPath, int _mode, std::string _testFilePath, int _fps)
+{
+	m_pScene->~SceneBase();
+
+#ifdef METAIO_SDK_NATIVE
+	m_pScene = new NativeScene(ui.graphicsView, ui.statusBar);
+#else
+	m_pScene = new ARELScene(ui.graphicsView, ui.statusBar);
+#endif
+
+	ui.graphicsView->setScene(m_pScene);
+
+#ifndef METAIO_SDK_TEMPLATE_NATIVE
+	// If you want to disable the web view's context menu for an AREL scene, enable this line
+	ui.graphicsView->setContextMenuPolicy(Qt::NoContextMenu);
+#endif
+	setConfig(_projectPath, _mode, _testFilePath, _fps);
 }

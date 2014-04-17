@@ -155,5 +155,10 @@ int init(int argc, char *argv[])
 	p.setConfig(projectPath, mode, testFilePath, fps);
 	p.show();
 
-	return a.exec();
+	int exitcode =  a.exec();
+	
+	p.m_pScene->~SceneBase();
+	p.deleteLater();
+
+	return exitcode;
 }
