@@ -10,15 +10,30 @@ Global
 		CategoryFile = ARdevKitPlayer.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|Win32 = Debug|Win32
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|Win32 = Release|Win32
+		Test|Any CPU = Test|Any CPU
+		Test|Mixed Platforms = Test|Mixed Platforms
 		Test|Win32 = Test|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D043D77E-CA71-429D-A01F-43B191131F08}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{D043D77E-CA71-429D-A01F-43B191131F08}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{D043D77E-CA71-429D-A01F-43B191131F08}.Debug|Mixed Platforms.Build.0 = Debug|Win32
 		{D043D77E-CA71-429D-A01F-43B191131F08}.Debug|Win32.ActiveCfg = Debug|Win32
 		{D043D77E-CA71-429D-A01F-43B191131F08}.Debug|Win32.Build.0 = Debug|Win32
+		{D043D77E-CA71-429D-A01F-43B191131F08}.Release|Any CPU.ActiveCfg = Release|Win32
+		{D043D77E-CA71-429D-A01F-43B191131F08}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{D043D77E-CA71-429D-A01F-43B191131F08}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{D043D77E-CA71-429D-A01F-43B191131F08}.Release|Win32.ActiveCfg = Release|Win32
 		{D043D77E-CA71-429D-A01F-43B191131F08}.Release|Win32.Build.0 = Release|Win32
+		{D043D77E-CA71-429D-A01F-43B191131F08}.Test|Any CPU.ActiveCfg = Test|Win32
+		{D043D77E-CA71-429D-A01F-43B191131F08}.Test|Mixed Platforms.ActiveCfg = Test|Win32
+		{D043D77E-CA71-429D-A01F-43B191131F08}.Test|Mixed Platforms.Build.0 = Test|Win32
 		{D043D77E-CA71-429D-A01F-43B191131F08}.Test|Win32.ActiveCfg = Test|Win32
 		{D043D77E-CA71-429D-A01F-43B191131F08}.Test|Win32.Build.0 = Test|Win32
 	EndGlobalSection

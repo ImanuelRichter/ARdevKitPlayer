@@ -37,3 +37,11 @@ Install Guide:
 	* zlib.h
 
 After that you should be able to compile and debug the project.
+
+
+Testing Guide:
+==============
+
+Select Test for a build Preset, and run each test in PLayerTest.cpp one at a time, by commenting or likewise, otherwise they will all fail after the first one.
+If you press the Run button it should run GoogleTest and you should be good for testing. 
+
